@@ -4,9 +4,11 @@ define(['jquery', '/bower/webmaker-ui/ui.js', 'sso-ux'],
     var lang = $('html').attr('lang');
 
     navigator.idSSO.app.onlogin = function (user) {
-      if (document.referrer.indexOf('events') !== -1) {
-        window.location = "/" + lang + "/events";
-      } else {
+    var rdomain = document.referrer.split( "\/" )[ 2 ];
+    if ( rdomain === "webmaker.org" || rdomain === "makes.org" ) {
+       window.location.replace( document.referrer );
+     }
+     else {
         window.location = "/" + lang;
       }
     };
